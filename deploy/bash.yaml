@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-bash
+#
+# Exec into this pod with: kubectl exec --stdin --tty simple-bash -- /bin/bash
+#
+spec:
+  containers:
+  - name: simple-bash
+    image: unterhol/simple-bash:latest
+    # Just spin & wait forever
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 30; done;" ]

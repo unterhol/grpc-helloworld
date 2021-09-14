@@ -1,19 +1,11 @@
-# syntax=docker/dockerfile:1
+FROM ubuntu:18.04
 
-FROM golang:1.16-alpine as build-env
+RUN apt-get update -y
+RUN apt-get install wget -y
 
-RUN mkdir /app
-WORKDIR /app
+RUN wget https://github.com/fullstorydev/grpcurl/releases/download/v1.8.2/grpcurl_1.8.2_linux_x86_64.tar.gz
 
-COPY go.mod .
-COPY go.sum .
-
-RUN go mod download
-COPY . .
-
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -o /go/bin/docker-grpc-helloworld
-
-FROM scratch
-EXPOSE 8080
-COPY --from=build-env /go/bin/docker-grpc-helloworld /go/bin/docker-grpc-helloworld
-CMD [ "/go/bin/docker-grpc-helloworld" ]
+RUN tar -xvzf grpcurl_1.8.2_linux_x86_64.tar.gz
+RUN chmod +x grpcurl
+RUN mv grpcurl /usr/local/bin/grpcurl
+RUN grpcurl --help
