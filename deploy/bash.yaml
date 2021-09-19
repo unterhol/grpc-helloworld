@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: simple-bash
 #
-# Exec into this pod with: kubectl exec --stdin --tty simple-bash -- /bin/bash
+# Exec into this pod with: kubectl exec --stdin --tty $POD -- /bin/bash
 #
 spec:
   containers:
