@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 RUN apt-get update -y
 RUN apt-get install wget -y
 RUN apt-get install traceroute -y
+RUN apt-get install iputils-ping
 
 RUN wget https://github.com/fullstorydev/grpcurl/releases/download/v1.8.2/grpcurl_1.8.2_linux_x86_64.tar.gz
 
